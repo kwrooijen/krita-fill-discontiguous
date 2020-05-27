@@ -42,10 +42,14 @@ undo.
 ![](assets/accidental-color-merge.gif)
 
 ## Todo
-[ ] Create a custom fill tool. Currently we use the foreground color to decide
+[] Create a custom fill tool. Currently we use the foreground color to decide
 what to replace. Instead it would be nice to use the foreground color as the
 replacement color, and have some kind of fill tool which will choose the color
 to replace.
 
-[ ] Replace in all keyframes. AFAIK keyframe API is very limited. It would be
+[] Replace in all keyframes. AFAIK keyframe API is very limited. It would be
 nice to be able to use the fill tool on all keyframes
+
+[] Update undo tree to keep track of all pixel position changed, and node
+position. Use that to undo any changes. This would solve teh accidental merge
+issue
