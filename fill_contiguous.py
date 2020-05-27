@@ -54,14 +54,35 @@ def color_picker_button(self):
     button.move(20,30)
     button.clicked.connect(self.on_click)
 
+def undo_button(self):
+    button = QPushButton('Undo', self)
+    button.setToolTip('Undo the last color replacement')
+    button.resize(170,32)
+    button.move(20,80)
+    button.clicked.connect(self.on_click_undo)
+
 class Fill_contiguous(DockWidget):
     def __init__(self):
         super().__init__()
+        self.undo_tree = {}
+        self.iteration = 0
         color_picker_button(self)
+        undo_button(self)
         self.setWindowTitle(DOCKER_NAME)
 
     def canvasChanged(self, canvas):
         pass
+
+    @pyqtSlot()
+    def on_click_undo(self):
+        if self.iteration > 0:
+            self.iteration = self.iteration - 1
+            nodes = self.undo_tree[self.iteration]["nodes"]
+            from_color = self.undo_tree[self.iteration]["from_color"]
+            to_color = self.undo_tree[self.iteration]["to_color"]
+            for node in nodes:
+                replace_color_in_node(node, to_color, from_color)
+            instance.activeDocument().refreshProjection()
 
     @pyqtSlot()
     def on_click(self):
@@ -70,6 +91,12 @@ class Fill_contiguous(DockWidget):
             from_color = get_foreground_color()
             to_color = q_color_to_q_byte_array(color)
             active_view = instance.activeWindow().activeView()
+            self.undo_tree[self.iteration] = {
+                "from_color": from_color,
+                "to_color": to_color,
+                "nodes": get_nodes()
+            }
+            self.iteration = self.iteration + 1
             for node in get_nodes():
                 replace_color_in_node(node, from_color, to_color)
             instance.activeDocument().refreshProjection()
