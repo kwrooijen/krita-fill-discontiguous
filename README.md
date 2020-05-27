@@ -4,6 +4,15 @@ A Krita plugin to replace a single color in one or multiple layers. This is is
 useful for things such as pixel art, where you might want to change a color in
 all layers.
 
+## Installation
+
+1. Go to the [releases page](https://github.com/kwrooijen/krita-fill-contiguous/releases) and download
+the latest release as a zip file
+2. Open Krita, go to Tools -> Scripts -> Import Python Plugin...
+3. Choose the downloaded zip file
+4. Restart Krita
+5. Settings -> Dockers -> Fill Contiguous
+
 ## Usage
 
 Your current foreground color will be replaced in any selected layers. You can
