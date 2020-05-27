@@ -1,7 +1,7 @@
 from PyQt5.QtCore import pyqtSlot, Qt, QVariant, QByteArray
 from PyQt5.QtGui import QColor
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QColorDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QColorDialog, QCheckBox
 from krita import DockWidget, DockWidgetFactory, DockWidgetFactoryBase
 import sys
 
@@ -9,6 +9,18 @@ DOCKER_NAME = 'Fill Contiguous'
 DOCKER_ID = 'pykrita_fill_contiguous'
 
 instance = Krita.instance()
+
+def push_node(collection, node):
+    collection.append(node)
+    for child in node.childNodes():
+        push_node(collection, child)
+
+def get_nodes():
+    active_view = instance.activeWindow().activeView()
+    collection = []
+    for node in active_view.selectedNodes():
+        push_node(collection, node)
+    return collection
 
 def get_foreground_color():
     active_view = instance.activeWindow().activeView()
@@ -36,9 +48,10 @@ def replace_color_in_node(node, from_color, to_color):
                 node.setPixelData(to_color, x, y, 1, 1)
 
 def color_picker_button(self):
-    button = QPushButton('Open color dialog', self)
-    button.setToolTip('Opens color dialog')
-    button.move(10,30)
+    button = QPushButton('Replace foreground', self)
+    button.setToolTip('Replace the forground color with a new color')
+    button.resize(170,32)
+    button.move(20,30)
     button.clicked.connect(self.on_click)
 
 class Fill_contiguous(DockWidget):
@@ -54,12 +67,12 @@ class Fill_contiguous(DockWidget):
     def on_click(self):
         color = QColorDialog.getColor()
         if color.isValid():
-            document = instance.activeDocument()
-            active_node = document.activeNode()
             from_color = get_foreground_color()
             to_color = q_color_to_q_byte_array(color)
-            replace_color_in_node(active_node, from_color, to_color)
-            document.refreshProjection()
+            active_view = instance.activeWindow().activeView()
+            for node in get_nodes():
+                replace_color_in_node(node, from_color, to_color)
+            instance.activeDocument().refreshProjection()
 
 dock_widget_factory = DockWidgetFactory(DOCKER_ID,
                                         DockWidgetFactoryBase.DockRight,
