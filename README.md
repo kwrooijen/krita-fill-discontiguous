@@ -12,7 +12,7 @@ foreground` button, and choose a color as a replacement.
 
 ## Demo
 
-![](assets/demo.mp4)
+![](assets/demo.gif)
 
 ## Caveats
 
@@ -30,7 +30,7 @@ custom undo function reverses the color replacement. If the replacement color
 was already there, it will be changed to the foreground color as well on
 undo. 
 
-![](assets/accidental-color-merge.mp4)
+![](assets/accidental-color-merge.gif)
 
 ## Todo
 [ ] Create a custom fill tool. Currently we use the foreground color to decide
