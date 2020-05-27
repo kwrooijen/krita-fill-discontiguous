@@ -1,4 +1,4 @@
-# Krita Fill Contiguous
+# Krita Fill Discontiguous
 
 A Krita plugin to replace a single color in one or multiple layers. This is is
 useful for things such as pixel art, where you might want to change a color in
@@ -6,12 +6,12 @@ all layers.
 
 ## Installation
 
-1. Go to the [releases page](https://github.com/kwrooijen/krita-fill-contiguous/releases) and download
+1. Go to the [releases page](https://github.com/kwrooijen/krita-fill-discontiguous/releases) and download
 the latest release as a zip file
 2. Open Krita, go to Tools -> Scripts -> Import Python Plugin...
 3. Choose the downloaded zip file
 4. Restart Krita
-5. Settings -> Dockers -> Fill Contiguous
+5. Settings -> Dockers -> Fill Discontiguous
 
 ## Usage
 
@@ -29,7 +29,7 @@ foreground` button, and choose a color as a replacement.
 
 Currently there's no API to access the undo history. Which means when you apply
 this plugins function you won't be able to use Krita's undo. Instead there's an
-undo button in the Fill Contiguous docker.
+undo button in the Fill Discontiguous docker.
 
 ### Accidentally merging colors
 

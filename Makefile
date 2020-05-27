@@ -1,2 +1,2 @@
 release:
-	zip -r fill_contiguous.zip fill_contiguous fill_contiguous.desktop LICENSE README.md
+	zip -r fill_discontiguous.zip fill_discontiguous fill_discontiguous.desktop LICENSE README.md

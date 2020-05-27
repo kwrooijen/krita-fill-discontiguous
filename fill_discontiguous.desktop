@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=Krita/PythonPlugin
-X-KDE-Library=fill_contiguous
+X-KDE-Library=fill_discontiguous
 X-Python-2-Compatible=false
 X-Krita-Manual=Manual.html
-Name=fill_contiguous
+Name=fill_discontiguous

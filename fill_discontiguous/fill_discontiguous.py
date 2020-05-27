@@ -5,8 +5,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QColorDialog, QC
 from krita import DockWidget, DockWidgetFactory, DockWidgetFactoryBase
 import sys
 
-DOCKER_NAME = 'Fill Contiguous'
-DOCKER_ID = 'pykrita_fill_contiguous'
+DOCKER_NAME = 'Fill Discontiguous'
+DOCKER_ID = 'pykrita_fill_discontiguous'
 
 instance = Krita.instance()
 
@@ -61,7 +61,7 @@ def undo_button(self):
     button.move(20,80)
     button.clicked.connect(self.on_click_undo)
 
-class Fill_contiguous(DockWidget):
+class Fill_discontiguous(DockWidget):
     def __init__(self):
         super().__init__()
         self.undo_tree = {}
@@ -103,6 +103,6 @@ class Fill_contiguous(DockWidget):
 
 dock_widget_factory = DockWidgetFactory(DOCKER_ID,
                                         DockWidgetFactoryBase.DockRight,
-                                        Fill_contiguous)
+                                        Fill_discontiguous)
 
 instance.addDockWidgetFactory(dock_widget_factory)
